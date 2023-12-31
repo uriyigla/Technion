@@ -30,8 +30,8 @@ public:
     void makeLeftSonAndFather(t_Node<T>* intendedLeftSon, t_Node<T>* intendedFather);
     void deletePostOrder (t_Node<T>* treeIterator, bool toDeleteDate);
     void updateRank(t_Node<T> *updateNode);
-//    void printBT(const std::string& prefix, t_Node<T>* node, bool isLeft);
-//    void printBT(t_Node<T>* node);
+    void printBT(const std::string& prefix, t_Node<T>* node, bool isLeft);
+    void printBT(t_Node<T>* node);
 
     t_Node<T> *m_root;
 };
@@ -654,28 +654,28 @@ void AVLTree<T>::updateRank(t_Node<T> *updateNode){
     }
 }
 
-//template<class T>
-//void AVLTree<T>::printBT(const std::string& prefix, t_Node<T>* node, bool isLeft)
-//{
-//    if( node != nullptr )
-//    {
-//        std::cout << prefix;
-//
-//        std::cout << (isLeft ? "|--" : "'--" );
-//
-//        // print the value of the node
-//        std::cout << *(node->m_data) << std::endl;
-//
-//        // enter the next tree level - left and right branch
-//        printBT( prefix + (isLeft ? "|   " : "    "), node->m_left_son, true);
-//        printBT( prefix + (isLeft ? "|   " : "    "), node->m_right_son, false);
-//    }
-//}
-//
-//template<class T>
-//void AVLTree<T>::printBT(t_Node<T>* node) {
-//    printBT("", node, false);
-//}
+template<class T>
+void AVLTree<T>::printBT(const std::string& prefix, t_Node<T>* node, bool isLeft)
+{
+    if( node != nullptr )
+    {
+        std::cout << prefix;
+
+        std::cout << (isLeft ? "|--" : "'--" );
+
+        // print the value of the node
+        std::cout << *(node->m_data) << std::endl;
+
+        // enter the next tree level - left and right branch
+        printBT( prefix + (isLeft ? "|   " : "    "), node->m_left_son, true);
+        printBT( prefix + (isLeft ? "|   " : "    "), node->m_right_son, false);
+    }
+}
+
+template<class T>
+void AVLTree<T>::printBT(t_Node<T>* node) {
+    printBT("", node, false);
+}
 
 
 

@@ -41,8 +41,8 @@ public:
     void addInorderList (t_Node<T>* treeIterator);
     void deletePostOrder (t_Node<T>* treeIterator, bool toDeleteDate);
 
-//    void printBT(const std::string& prefix, t_Node<T>* node, bool isLeft);
-//    void printBT(t_Node<T>* node);
+    void printBT(const std::string& prefix, t_Node<T>* node, bool isLeft);
+    void printBT(t_Node<T>* node);
 
     t_Node<T> *m_root;
     List<T> m_list;
@@ -148,7 +148,7 @@ t_Node<T>* AVLTree<T>::treeInsert(T* a) {
 
 template<class T>
 t_Node<T>* AVLTree<T>::treeInsertById(T *a) {
-    t_Node<T> *b = new t_Node<T>(a);/////////////////exception//check allocation
+    t_Node<T> *b = new t_Node<T>(a);
     l_Node<T>* listNode;
     if (this->m_root == nullptr) {
         m_root = b;
@@ -200,19 +200,19 @@ void AVLTree<T>::afterTreeInsert(t_Node<T>* newNode) {
 template <class T>
 t_Node<T>* AVLTree<T>::treeObjectFind(T* obj){
     if (this->m_root == nullptr) {
-        return nullptr; ///////////empty tree without nodes, // ///////////////exception
+        return nullptr;
     }
     t_Node<T> *iterator = this->m_root;
     while (*(iterator->m_data) != *obj) {
         if ((*iterator->m_data) > *obj) {
             if (iterator->m_left_son == nullptr) {
-                return nullptr; /////////////////exception
+                return nullptr;
             }
             iterator = iterator->m_left_son;
         }
         else {
             if (iterator->m_right_son == nullptr) {
-                return nullptr; /////////////////exception
+                return nullptr;
             }
             iterator = iterator->m_right_son;
         }
@@ -223,19 +223,19 @@ t_Node<T>* AVLTree<T>::treeObjectFind(T* obj){
 template <class T>
 t_Node<T>* AVLTree<T>::treeIdFind(int id){
     if (this->m_root == nullptr) {
-        return nullptr; ///////////empty tree without nodes, // ///////////////exception
+        return nullptr;
     }
     t_Node<T> *iterator = this->m_root;
     while ((int)(*(iterator->m_data)) != id) {
         if ((int)(*iterator->m_data) > id) {
             if (iterator->m_left_son == nullptr) {
-                return nullptr; /////////////////exception
+                return nullptr;
             }
             iterator = iterator->m_left_son;
         }
         else {
             if (iterator->m_right_son == nullptr) {
-                return nullptr; /////////////////exception
+                return nullptr;
             }
             iterator = iterator->m_right_son;
         }
@@ -268,12 +268,12 @@ bool AVLTree<T>::treeDelete(t_Node<T>* nodeToDelete) {
     }
 
     t_Node<T> *iterator = nullptr;
-    int counter = 0; ///////////////////////////////////////////////////////////////////////////////////////שינוי
+    int counter = 0;
     if (nodeToDelete->m_left_son != nullptr) {
         iterator = nodeToDelete->m_left_son;
         while (iterator->m_right_son != nullptr) {
             iterator = iterator->m_right_son;
-            counter++;////////////////////////////////////////////////////////////////////////////////////////שינוי
+            counter++;
         }
         if (iterator->m_left_son == nullptr) {
             switchDataNodes(nodeToDelete, iterator);
@@ -294,12 +294,12 @@ bool AVLTree<T>::treeDelete(t_Node<T>* nodeToDelete) {
             }
             t_Node<T>* fatherOfNodeToDelete = nodeToDelete->m_father;
             fatherAndSonSeparation(nodeToDelete);
-            if (counter == 0) { ////////////////////////////////////////////////////////////////////////////שינוי
+            if (counter == 0) {
                 makeLeftSonAndFather(nodeToDelete->m_left_son, fatherOfNodeToDelete);/////////////////////////שינוי
-            }////////////////////////////////////////////////////////////////////////////שינוי
-            else {////////////////////////////////////////////////////////////////////////////שינוי
+            }
+            else {
                 makeRightSonAndFather(nodeToDelete->m_left_son, fatherOfNodeToDelete);////////////////////////////////////////////////////////////////////////////שינוי
-            }////////////////////////////////////////////////////////////////////////////שינוי
+            }
             nodeToDelete->m_left_son = nullptr;
             m_list.listRemove(nodeToDelete->m_place_in_List);
             delete nodeToDelete;
@@ -646,9 +646,9 @@ void AVLTree<T>::createFullTreeFromNode (t_Node<T>* head,int height){
 
 template<class T>
 void AVLTree<T>::createFullTree(int size){
-    if (size == 0) {////////////////////////////////////שינוי
-        return;////////////////////////////////////שינוי
-    }////////////////////////////////////שינוי
+    if (size == 0) {
+        return;
+    }
     int height= FullTreeHeight(size);
     createFullTreeFromNode(m_root,height);
 }
@@ -753,26 +753,26 @@ void AVLTree<T>::deletePostOrder (t_Node<T>* treeIterator, bool toDeleteDate) {
 
 
 
-//template<class T>
-//void AVLTree<T>::printBT(const std::string& prefix, t_Node<T>* node, bool isLeft)
-//{
-//    if( node != nullptr )
-//    {
-//        std::cout << prefix;
-//
-//        std::cout << (isLeft ? "|--" : "'--" );
-//
-//        // print the value of the node
-//        std::cout << (int)(*(node->m_data)) << std::endl;
-//
-//        // enter the next tree level - left and right branch
-//        printBT( prefix + (isLeft ? "|   " : "    "), node->m_left_son, true);
-//        printBT( prefix + (isLeft ? "|   " : "    "), node->m_right_son, false);
-//    }
-//}
-//
-//template<class T>
-//void AVLTree<T>::printBT(t_Node<T>* node) {
-//    printBT("", node, false);
-//}
+template<class T>
+void AVLTree<T>::printBT(const std::string& prefix, t_Node<T>* node, bool isLeft)
+{
+    if( node != nullptr )
+    {
+        std::cout << prefix;
+
+        std::cout << (isLeft ? "|--" : "'--" );
+
+        // print the value of the node
+        std::cout << (int)(*(node->m_data)) << std::endl;
+
+        // enter the next tree level - left and right branch
+        printBT( prefix + (isLeft ? "|   " : "    "), node->m_left_son, true);
+        printBT( prefix + (isLeft ? "|   " : "    "), node->m_right_son, false);
+    }
+}
+
+template<class T>
+void AVLTree<T>::printBT(t_Node<T>* node) {
+    printBT("", node, false);
+}
 #endif //WET1_AVLTREE_H

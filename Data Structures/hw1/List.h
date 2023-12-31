@@ -117,7 +117,7 @@ void List<T>::mergeList(List<T>* a, List<T>* b) {
     int length=a->m_size+b->m_size;
     l_Node<T>* newInsertNode=nullptr;
     l_Node<T>* dataOriginNode=nullptr;
-    
+
     for (int i=0;i<length;i++){
         if (nodeList1 == nullptr) {
             newInsertNode = this->listInsertAfter(nodeList2->m_data,m_rear);
@@ -145,7 +145,7 @@ void List<T>::mergeList(List<T>* a, List<T>* b) {
     }
 }
 
-template<class T> /////////////////////////////////////////////////////////////////////////begin of change
+template<class T>
 void List<T>::mergeListOther(List<T>* a, List<T>* b) {
     l_Node<T> *nodeList1 = a->m_head;
     l_Node<T> *nodeList2 = b->m_head;
@@ -178,6 +178,6 @@ void List<T>::mergeListOther(List<T>* a, List<T>* b) {
         }
         newInsertNode->m_place_in_tree=dataOriginNode->m_place_in_tree->m_place_other_tree;
     }
-}           /////////////////////////////////////////////////////////////////////////end of change
+}
 
 #endif //WET1_LIST_H

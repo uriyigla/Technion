@@ -23,14 +23,14 @@ public:
 
     Player(const Player &a) = delete;
     Player &operator=(const Player &a) = delete;
-    ~ Player()=default;
+    ~Player() = default;
 
     bool operator>(const Player &a) const;
     bool operator==(const Player &a) const;
     bool operator!=(const Player &a) const;
     explicit operator int() const;
-    void updateStats (int gamesPlayed,int  scoredGoals,int cardsReceived);
-    int closer (Player* player1,Player* player2);
+    void updateStats(int gamesPlayed, int scoredGoals, int cardsReceived);
+    int closer(Player* player1, Player* player2);
 
     int m_id;
     int m_gamesAlone;
@@ -40,6 +40,5 @@ public:
     bool m_goalKeeper;
     t_Node<Team>* m_teamNode;
 };
-
 
 #endif //WET1_PLAYER_H

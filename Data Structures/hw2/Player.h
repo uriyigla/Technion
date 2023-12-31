@@ -43,9 +43,3 @@ public:
 
 
 
-
-//    explicit operator int() const;
-//    bool operator>(const Team& b) const;
-
-
-

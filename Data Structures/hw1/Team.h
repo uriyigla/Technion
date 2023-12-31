@@ -21,11 +21,10 @@ public:
                                    m_goals(0),
                                    m_teamPlayersTree(),
                                    m_teamPlayersByIdTree()
-    {}
+    {
+    }
 
-
-
-    ~Team()= default;
+    ~Team() = default;
 
     bool operator>(const Team &b) const;
 
@@ -35,15 +34,15 @@ public:
 
     explicit operator int() const;
 
-    void addPlayerStatsToTeam (const Player* playerAdded);
+    void addPlayerStatsToTeam(const Player *playerAdded);
 
-    void removePlayerStatsFromTeam (const Player* playerAdded);
+    void removePlayerStatsFromTeam(const Player *playerAdded);
 
     bool isValid() const;
 
-    void playMatch(Team* team);
+    void playMatch(Team *team);
 
-    void mergeTeam (const Team* team1,const Team* team2);
+    void mergeTeam(const Team *team1, const Team *team2);
 
     int m_id;
     int m_points;
@@ -55,6 +54,5 @@ public:
     AVLTree<Player> m_teamPlayersTree;
     AVLTree<Player> m_teamPlayersByIdTree;
 };
-
 
 #endif //WET1_TEAM_H

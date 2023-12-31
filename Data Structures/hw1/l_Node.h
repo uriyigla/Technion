@@ -17,12 +17,7 @@ public:
     l_Node(const l_Node& a) = default; //to delete
     l_Node &operator=(const l_Node& a) = default; //to delete
     ~l_Node()=default;
-//    {
-//        m_place_in_tree=nullptr;
-//        m_next=nullptr;
-//        m_prev= nullptr;
-//        delete this;
-//    }
+
     T* m_data;
     l_Node<T> *m_prev;
     l_Node<T> *m_next;
@@ -31,4 +26,3 @@ public:
 };
 
 #endif //WET1_L_NODE_H
-
