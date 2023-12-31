@@ -3,10 +3,9 @@
 
 #include "Card.h"
 
-class  Dragon: public  Battle{
+class Dragon : public Battle {
 
 public:
-
     Dragon();
     Dragon(const Dragon&) = default;
     Dragon& operator=(const Dragon& other) = default;

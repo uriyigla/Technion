@@ -10,6 +10,7 @@ class Card {
 protected:
 
     std::string m_name;
+
     friend std::ostream& operator<<(std::ostream& os, const Card& card);
 
 public:
@@ -18,16 +19,17 @@ public:
     Card(const Card&) = default;
     Card& operator=(const Card& other) = default;
     virtual ~Card() = default;
-    virtual void applyEncounter(Player& player) const=0;
+
+    virtual void applyEncounter(Player& player) const = 0;
     virtual void print(std::ostream& os) const;
 
 };
 
-class  Battle:public  Card{
+class Battle : public Card {
 
 protected:
 
-    int m_force,m_damage,m_loot,m_lostForce;
+    int m_force, m_damage, m_loot, m_lostForce;
 
 public:
 
@@ -41,7 +43,7 @@ public:
 
 };
 
-class  Hp:public  Card{
+class Hp : public Card {
 
 protected:
 
@@ -54,7 +56,7 @@ public:
     Hp& operator=(const Hp& other) = default;
     virtual ~Hp() = default;
 
-    virtual void applyEncounter(Player& player) const =0;
+    virtual void applyEncounter(Player& player) const = 0;
     void print(std::ostream& os) const override;
 
 };

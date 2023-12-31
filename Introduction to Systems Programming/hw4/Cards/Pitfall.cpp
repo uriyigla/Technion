@@ -4,17 +4,17 @@
 
 static const int PITFALL_HP = 10;
 static const std::string PITFALL ="Pitfall";
-static const std::string ROUGE ="Rogue";
+static const std::string ROGUE ="Rogue";  // Fixed the typo in the job name
 
-Pitfall::Pitfall():Hp()
+Pitfall::Pitfall() : Hp()
 {
-    m_name=PITFALL;
-    m_Hp=PITFALL_HP;
+    m_name = PITFALL;
+    m_Hp = PITFALL_HP;
 }
 
-void Pitfall::applyEncounter(Player& player) const
+void Pitfall::applyEncounter(Player &player) const
 {
-    if (player.getJob()==ROUGE)
+    if (player.getJob() == ROGUE)
     {
         printPitfallMessage(true);
         return;

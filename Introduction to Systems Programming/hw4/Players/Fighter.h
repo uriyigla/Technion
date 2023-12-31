@@ -1,5 +1,6 @@
 #ifndef MAIN_CPP_FIGHTER_H
 #define MAIN_CPP_FIGHTER_H
+
 #include "Player.h"
 
 class Fighter : public Player {

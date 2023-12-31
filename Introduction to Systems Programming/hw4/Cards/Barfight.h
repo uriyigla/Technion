@@ -3,7 +3,7 @@
 
 #include "Card.h"
 
-class  Barfight: public  Hp{
+class Barfight : public Hp {
 
 public:
 
@@ -16,4 +16,4 @@ public:
 
 };
 
-#endif //PLAYER_H_BARFIGHT_H
+#endif // PLAYER_H_BARFIGHT_H

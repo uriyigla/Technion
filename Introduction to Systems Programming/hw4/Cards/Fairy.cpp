@@ -3,19 +3,16 @@
 #include <string>
 
 static const int FAIRY_HP = 10;
-static const std::string FAIRY ="Fairy";
-static const std::string WIZARD ="Wizard";
+static const std::string FAIRY = "Fairy";
+static const std::string WIZARD = "Wizard";
 
-Fairy::Fairy():Hp()
-{
-    m_name=FAIRY;
-    m_Hp=FAIRY_HP;
+Fairy::Fairy() : Hp() {
+    m_name = FAIRY;
+    m_Hp = FAIRY_HP;
 }
 
-void Fairy::applyEncounter(Player& player) const
-{
-    if (player.getJob()==WIZARD)
-    {
+void Fairy::applyEncounter(Player& player) const {
+    if (player.getJob() == WIZARD) {
         printFairyMessage(true);
         player.heal(FAIRY_HP);
         return;
@@ -23,4 +20,3 @@ void Fairy::applyEncounter(Player& player) const
     printFairyMessage(false);
     return;
 }
-

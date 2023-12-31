@@ -1,25 +1,19 @@
-#ifndef PLAYER_H_MERCHANT_H
-#define PLAYER_H_MERCHANT_H
-
-#include <string>
-#include "../Players/Player.h"
-#include "../utilities.h"
 #include "Card.h"
+#include "Merchant.h"
+#include <string>
 
-class Merchant:public Card {
+static const int MERCHANT_BUY_HP = 2;
+static const int MERCHANT_BUY_FORCE = 1;
+static const std::string MERCHANT ="Merchant";
 
-protected:
+Merchant::Merchant() : Card(), m_buyHp(MERCHANT_BUY_HP), m_buyForce(MERCHANT_BUY_FORCE)
+{
+    m_name = MERCHANT;
+}
 
-    int m_buyHp,m_buyForce;
-
-public:
-
-    Merchant();
-    Merchant(const Merchant &) = default;
-    Merchant &operator=(const Merchant &merchant) = default;
-    ~Merchant() = default;
-    void applyEncounter(Player& player) const override;
-
-};
-
-#endif //PLAYER_H_MERCHANT_H
+void Merchant::applyEncounter(Player &player) const
+{
+    printMerchantMessage();
+    player.buff(m_buyForce);
+    player.heal(m_buyHp);
+}

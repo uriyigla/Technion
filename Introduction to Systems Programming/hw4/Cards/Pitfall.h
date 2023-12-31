@@ -3,16 +3,16 @@
 
 #include "Card.h"
 
-class  Pitfall: public  Hp{
+class Pitfall : public Hp {
 
 public:
 
     Pitfall();
-    Pitfall(const Pitfall&) = default;
-    Pitfall& operator=(const Pitfall& other) = default;
+    Pitfall(const Pitfall &) = default;
+    Pitfall &operator=(const Pitfall &other) = default;
     ~Pitfall() = default;
 
-    void applyEncounter(Player& player) const;
+    void applyEncounter(Player &player) const;
 
 };
 

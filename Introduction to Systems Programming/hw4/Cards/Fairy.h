@@ -3,7 +3,7 @@
 
 #include "Card.h"
 
-class  Fairy: public  Hp{
+class Fairy : public Hp {
 
 public:
 
@@ -16,4 +16,4 @@ public:
 
 };
 
-#endif //PLAYER_H_FAIRY_H
+#endif // PLAYER_H_FAIRY_H

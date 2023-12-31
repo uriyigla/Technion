@@ -3,7 +3,7 @@
 
 #include "Card.h"
 
-class  Vampire: public  Battle{
+class Vampire : public Battle {
 
 public:
 
