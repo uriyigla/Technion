@@ -25,7 +25,7 @@ int getSizeQueue(pQueue que);
 
 void enqueue(pQueue que, int fd, struct timeval arrival);
 
-pNode dequeue(pQueue que); // maybe change to int so the memory manegment will be internal
+pNode dequeue(pQueue que);
 
 pNode dequeueByVal(pQueue que, int fd);
 

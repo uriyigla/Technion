@@ -24,9 +24,6 @@ pQueue requests;
 
 
 void * workerThread(void *arg) {
-    //void ** args = (void**)arg;
-    //pQueue threads = (pQueue)args[0];
-    //pQueue other = (pQueue)args[1];
     pThread_stats statistics = (pThread_stats) malloc(sizeof (Thread_stats));
 
     statistics->handler_thread_id = *(int*)arg;
@@ -37,7 +34,6 @@ void * workerThread(void *arg) {
 
     int fd;
     while (1) {
-        //acces first que
         pthread_mutex_lock(&mutex);
         while (waiting_size == 0) {
             pthread_cond_wait(&cond_que_empty, &mutex);
@@ -47,29 +43,21 @@ void * workerThread(void *arg) {
         threads_size++;
         pthread_cond_signal(&cond_que_full);
         pthread_mutex_unlock(&mutex);
-
-
         pReq_stats reqStats = (pReq_stats) malloc(sizeof (Req_stats));
         struct timeval curr_time ;
         gettimeofday(&curr_time,NULL);
         reqStats->arrival_time = curr->arrival_time;
         timersub(&curr_time,&reqStats->arrival_time,&reqStats->dispatch_time);
         reqStats->handler_thread_stats = statistics;
-
-
-        //handle request
         fd = curr->fd;
         requestHandle(fd, reqStats);
         Close(fd);
-
         free(curr);
         free(reqStats);
-        //remove by val from thred
         pthread_mutex_lock(&mutex);
         threads_size--;
         pthread_cond_signal(&cond_que_full);
         pthread_mutex_unlock(&mutex);
-        //free(temp);
     }
 }
 
@@ -77,13 +65,10 @@ static int getSizeBothQueues() {
     return waiting_size + threads_size;
 }
 
-
-// HW3: Parse the new arguments too
 void getargs(int *port, int argc, char *argv[])
 {
     if (argc < 5) {
         fprintf(stderr, "Usage: %s <port>\n", argv[0]);
-        //what error message should we print
         exit(1);
     }
     *port = atoi(argv[1]);
@@ -108,11 +93,10 @@ int main(int argc, char *argv[])
     pthread_cond_init(&cond_que_empty, NULL);
     pthread_cond_init(&cond_que_full, NULL);
 
-    // initalize queues
     requests = initQueue();
     threads_size = 0;
     waiting_size = 0;
-    //initialize threads
+
     pthread_t thread_arr[num_threds];
     for(int i = 0; i < num_threds; i++) {
         int* idx = (int*) malloc(sizeof (int));
@@ -122,9 +106,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    // create thredes given size
-    // HW3: Create some threads...
-    //
 
     listenfd = Open_listenfd(port);
     while (1) {
@@ -132,7 +113,6 @@ int main(int argc, char *argv[])
         connfd = Accept(listenfd, (SA *)&clientaddr, (socklen_t *) &clientlen);
         struct timeval arrival;
         gettimeofday(&arrival,NULL);
-
 
         if (getSizeBothQueues() >= q_size) {
             pthread_mutex_lock(&mutex);
@@ -173,9 +153,7 @@ int main(int argc, char *argv[])
                 waiting_size++;
                 pthread_cond_signal(&cond_que_empty);
                 pthread_mutex_unlock(&mutex);
-
             }
-
             if(strcmp(overload_handling,"bf")==0){
                 while(getSizeBothQueues() > 0) {
                     pthread_cond_wait(&cond_que_full,&mutex);
@@ -183,17 +161,13 @@ int main(int argc, char *argv[])
                 close(connfd);
                 pthread_mutex_unlock(&mutex);
             }
-
             if(strcmp(overload_handling,"dynamic")==0){
                 if(q_size < max_size) {
                     q_size++;
                 }
                 Close(connfd);
                 pthread_mutex_unlock(&mutex);
-
-
             }
-
             if(strcmp(overload_handling,"random")==0) {
                 int half;
                 if(waiting_size % 2 != 0){
@@ -203,7 +177,6 @@ int main(int argc, char *argv[])
                 }
                 int idx;
                 for(int i=  0 ; i < half ; i++){
-                    //srand(time(0));
                     idx = rand() % (waiting_size - 1);
                     pNode temp = dequeueByIDX(requests, idx);
                     close(temp->fd);
@@ -214,9 +187,7 @@ int main(int argc, char *argv[])
                 waiting_size++;
                 pthread_cond_signal(&cond_que_empty);
                 pthread_mutex_unlock(&mutex);
-
             }
-//
         } else {
             pthread_mutex_lock(&mutex);
             enqueue(requests, connfd, arrival);
